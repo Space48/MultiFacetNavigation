@@ -19,8 +19,7 @@
     <?php foreach ($filterItems as $filterItem): ?>
         <li class="item">
             <?php if ($filterItem->getCount() > 0): ?>
-                <?php $facetName = substr(md5(microtime()),rand(0,26),5); ?>
-                <?php $facetValue = rand(0,100); ?>
+                <?php $facetValue = $filterItem->getData('value'); ?>
                 <a class="js-facet-link" href="<?php echo $block->escapeUrl($filterItem->getUrl()) ?>" data-facet-name="<?php echo $facetName; ?>" data-facet-value="<?php echo $facetValue; ?>">
                     <?php /* @escapeNotVerified */ echo $filterItem->getLabel() ?>
                     <?php if ($this->helper('\Magento\Catalog\Helper\Data')->shouldDisplayProductCountOnLayer()): ?>
