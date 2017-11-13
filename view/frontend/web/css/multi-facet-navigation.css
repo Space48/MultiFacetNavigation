@@ -1,0 +1,27 @@
+.filter-done {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 901;
+    width: 100%;
+    background: $page__background-color;
+    padding: 20px;
+    border-top: 1px solid $color-gray96;
+}
+
+.filter-label {
+    text-align: center;
+}
+
+.done-button {
+    width: 100%;
+    display: block;
+}
+
+.filter-options .js-facet-link.is-selected {
+    background: red;
+}
+
+.filter-options .js-facet-link.is-disabled {
+    opacity: 0.2;
+}
