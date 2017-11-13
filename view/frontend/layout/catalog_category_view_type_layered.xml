@@ -10,7 +10,6 @@
         <referenceContainer name="before.body.end">
             <block class="Magento\Framework\View\Element\Template" name="facet-nav-footer" as="facetNavFooter" template="Space48_MultiFacetNavigation::layer/filter-footer.phtml" />
         </referenceContainer>
-        <!-- <referenceBlock name="catalog.leftnav" template="Space48_MultiFacetNavigation::layer/view.phtml" /> -->
         <referenceBlock name="catalog.navigation.renderer" template="Space48_MultiFacetNavigation::layer/filter.phtml" />
     </body>
 </page>
