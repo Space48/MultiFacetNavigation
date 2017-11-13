@@ -7,10 +7,10 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="sidebar.main">
-            <block class="Magento\Framework\View\Element\Template" name="facet-nav-scripts" as="facetNavScripts" template="Space48_MultiFacetNavigation::layer/scripts.phtml" />
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="facet-nav-footer" as="facetNavFooter" template="Space48_MultiFacetNavigation::layer/filter-footer.phtml" />
         </referenceContainer>
-        <referenceBlock name="catalog.leftnav" template="Space48_MultiFacetNavigation::layer/view.phtml" />
+        <!-- <referenceBlock name="catalog.leftnav" template="Space48_MultiFacetNavigation::layer/view.phtml" /> -->
         <referenceBlock name="catalog.navigation.renderer" template="Space48_MultiFacetNavigation::layer/filter.phtml" />
     </body>
 </page>

@@ -1,4 +1,4 @@
-define(['jquery', 'matchMedia'], function ($, matchMedia) {
+define(['jquery', 'underscore', 'matchMedia'], function ($, _, matchMedia) {
 
     'use strict';
 
@@ -7,18 +7,18 @@ define(['jquery', 'matchMedia'], function ($, matchMedia) {
             self.config = config;
             self.$el = $(node);
 
+            self.currentSelection = {};
+
             self.constructInitialParams();
 
-            self.captureFacetLinks();
+            self.captureFacetLinkClicks();
             self.bindDoneButtonAction();
         },
 
         constructInitialParams: function () {
             var splitUrl = window.location.href.split('?');
             self.pageUrl = splitUrl[0];
-            self.currentSelection = splitUrl[1] ? self.explodeParams(splitUrl[1]) : {};
-
-            console.log(self.currentSelection);
+            self.initialSelection = splitUrl[1] ? self.explodeParams(splitUrl[1]) : {};
         },
 
         explodeParams: function (str) {
@@ -35,7 +35,7 @@ define(['jquery', 'matchMedia'], function ($, matchMedia) {
             return window.matchMedia(self.config.isMobileMediaQuery).matches;
         },
 
-        captureFacetLinks: function () {
+        captureFacetLinkClicks: function () {
             self.$(self.config.linkSelector).on('click', function (evt) {
                 var $this = $(this);
                 var facetName = $this.data('facet-name');
@@ -44,23 +44,53 @@ define(['jquery', 'matchMedia'], function ($, matchMedia) {
                 if (self.isMobile()) {
                     evt.preventDefault();
 
-                    if (self.currentSelection[facetName]) {
+                    if (self.currentSelection[facetName] && self.currentSelection[facetName] !== facetValue) {
+                        /* Facet has value but it isn't this. Facet is disabled, do nothing */
+                        return;
+                    } else if (self.currentSelection[facetName] === facetValue) {
+                        /* This facet/value pair is selected. Unselect it */
                         $this.removeClass('is-selected');
                         delete self.currentSelection[facetName];
                     } else {
+                        /* This facet can be selected. Do it */
                         $this.addClass('is-selected');
                         self.currentSelection[facetName] = facetValue;
                     }
+
+                    self.refreshDisabledStates();
+                }
+            });
+        },
+
+        refreshDisabledStates: function () {
+            /*  Add disabled classes */
+            $(self.config.linkSelector).each(function () {
+                var $this = $(this);
+                var facetName = $this.data('facet-name');
+                var facetValue = $this.data('facet-value');
+
+                if (self.currentSelection.hasOwnProperty(facetName) && self.currentSelection[facetName] !== facetValue) {
+                    /*  If current selection has a value which isn't this */
+                    $this.addClass('is-disabled');
+                } else {
+                    $this.removeClass('is-disabled');
                 }
             });
         },
 
         bindDoneButtonAction: function () {
-            $('.js-facets-done').on('click', self.constructPageUrl);
+            $('.js-facets-done').on('click', self.buildUrl);
         },
 
-        constructPageUrl: function () {
-            console.log(self.pageUrl + $.param(self.currentSelection));
+        buildUrl: function () {
+            var mergedSelection = _.extend(self.initialSelection, self.currentSelection);
+            var param = '?' + $.param(mergedSelection);
+
+            if (_.isEmpty(self.currentSelection)) {
+                return;
+            }
+
+            window.location.href = self.pageUrl + param;
         },
 
         $: function (selector) {
