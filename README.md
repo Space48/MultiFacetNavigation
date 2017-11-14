@@ -23,6 +23,6 @@ After installation, a product listing page should have a 'done' button at the bo
 
 ## Notes
 
-This functionality will only affect mobile. The media query that will be used to determine mobile view can be modified in `view/frontend/templates/layer/filter-footer.phtml`**.
+This functionality will only affect mobile (below 768px screen width by default). The media query that will be used to determine mobile view can be modified in `view/frontend/templates/layer/filter-footer.phtml`.
 
 A very basic stylesheet is included to provide mock functionality. It is expected that this stylesheet will be removed in the theme and theme-specific styling added via the theme's particular CSS prepocessor (e.g. as a SASS partial).
