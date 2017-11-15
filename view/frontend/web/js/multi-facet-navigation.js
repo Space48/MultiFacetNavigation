@@ -87,6 +87,9 @@ define(['jquery', 'underscore', 'matchMedia'], function ($, _, matchMedia) {
             var param = '?' + $.param(mergedSelection);
 
             if (_.isEmpty(self.currentSelection)) {
+                if (self.config.closeNavigationSelector) {
+                    $(self.config.closeNavigationSelector).trigger('click');
+                }
                 return;
             }
 
