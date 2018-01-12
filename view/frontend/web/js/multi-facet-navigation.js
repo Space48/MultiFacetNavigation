@@ -1,9 +1,12 @@
-define(['jquery', 'underscore', 'matchMedia'], function ($, _, matchMedia) {
+define(['jquery', 'uiComponent', 'underscore', 'matchMedia', 'domReady!'], function ($, Component, _, matchMedia) {
 
     'use strict';
 
-    var self = {
+    var self;
+
+    return Component.extend({
         initialize: function (config, node) {
+            self = this;
             self.config = config;
             self.$el = $(node);
 
@@ -99,7 +102,5 @@ define(['jquery', 'underscore', 'matchMedia'], function ($, _, matchMedia) {
         $: function (selector) {
             return $(selector, self.$el);
         }
-    };
-
-    return self.initialize;
+    });
 });
