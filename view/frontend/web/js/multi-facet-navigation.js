@@ -20,10 +20,16 @@ define(['jquery', 'uiComponent', 'underscore', 'matchMedia', 'domReady!'], funct
 
         constructInitialParams: function () {
             var splitUrl = window.location.href.split('?');
+            var explodedParams;
             self.pageUrl = splitUrl[0];
-            /* Remove current page parameter */
-            splitUrl[1] = splitUrl[1].replace(/(^|\&)p\=\d*(?=\&?)/,'').replace(/^\&/,'');
-            self.initialSelection = splitUrl[1] ? self.explodeParams(splitUrl[1]) : {};
+
+            if (splitUrl[1]) {
+                explodedParams = self.explodeParams(splitUrl[1]);
+                delete explodedParams.p; /* Do not include 'page' parameter in initial params */
+                self.initialSelection = explodedParams;
+            } else {
+                self.initialSelection = {};
+            }
         },
 
         explodeParams: function (str) {
