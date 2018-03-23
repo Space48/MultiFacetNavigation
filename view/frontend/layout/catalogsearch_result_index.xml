@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2017 Space 48. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Space48_MultiFacetNavigation::css/multi-facet-navigation.css" />
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="facet-nav-footer" as="facetNavFooter" template="Space48_MultiFacetNavigation::layer/filter-footer.phtml" />
+        </referenceContainer>
+        <referenceBlock name="catalog.navigation.renderer" template="Space48_MultiFacetNavigation::layer/filter.phtml" />
+    </body>
+</page>
