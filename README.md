@@ -1,5 +1,5 @@
 # MultiFacetNavigation
-Facet navigation with multi-facet selection on mobile
+Magento 2 module to add facet navigation with multi-facet selection on mobile.
 
 ## Installation
 
