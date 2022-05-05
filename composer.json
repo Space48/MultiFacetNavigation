@@ -4,7 +4,7 @@
   "type": "magento2-module",
   "license": "proprietary",
   "require": {
-	"php": "~7.0|~7.1",
+	"php": "~7.0|~7.1|~8.1",
 	"magento/framework": "^100.1.0|^101.0.0|^102.0.0|^103.0"
   },
   "repositories": {
